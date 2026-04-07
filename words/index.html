@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Multimedia Dictionary</title>
+</head>
+
+<body>
+
+  <!-- WORD SECTION -->
+  <h2>Word Section</h2>
+  <select id="wordSelect" onchange="updateSentence()">
+    <option value="">-- Select a Word --</option>
+    <option value="Apple" data-sentence="An apple is a sweet red fruit.">Apple</option>
+    <option value="Dog" data-sentence="A dog is a loyal animal.">Dog</option>
+    <option value="Car" data-sentence="A car is used for transportation.">Car</option>
+    <option value="Book" data-sentence="A book contains pages to read.">Book</option>
+    <option value="Sun" data-sentence="The sun gives us light and heat.">Sun</option>
+  </select>
+
+  <button onclick="speakWord()">Speak Word</button>
+
+  <br><br>
+
+  <!-- SENTENCE SECTION -->
+  <h2>Sentence Section</h2>
+  <textarea id="sentenceDisplay" rows="3" cols="40" readonly></textarea>
+
+  <button onclick="speakSentence()">Speak Sentence</button>
+
+  <script>
+    // SPEECH ENGINE (from PDF)
+    function speak(textToSay) {
+      const message = new SpeechSynthesisUtterance(textToSay);
+      message.pitch = 1.2;
+      message.rate = 1.0;
+      window.speechSynthesis.speak(message);
+    }
+
+    // UPDATE SENTENCE (Drill-down technique)
+    function updateSentence() {
+      const menu = document.getElementById("wordSelect");
+      const display = document.getElementById("sentenceDisplay");
+
+      if (menu.selectedIndex > 0) {
+        const selectedOption = menu.options[menu.selectedIndex];
+        display.value = selectedOption.dataset.sentence;
+      } else {
+        display.value = "";
+      }
+    }
+
+    // SPEAK WORD BUTTON
+    function speakWord() {
+      const menu = document.getElementById("wordSelect");
+
+      if (menu.selectedIndex > 0) {
+        speak(menu.value);
+      }
+    }
+
+    // SPEAK SENTENCE BUTTON
+    function speakSentence() {
+      const display = document.getElementById("sentenceDisplay");
+
+      if (display.value !== "") {
+        speak(display.value);
+      }
+    }
+  </script>
+
+    <hr class="line">
+			<h1><a href="../assignments.html"> Assignments </a></h1> <br />
+		<hr class="line">
+</body>
+</html>
