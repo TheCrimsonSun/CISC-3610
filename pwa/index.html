@@ -21,15 +21,24 @@
   </header>
 
   <main>
-    <section class="hero">
-      <h2>Blank App Shell</h2>
-      <p>This template includes a web app manifest, service worker registration, install prompt handling, and simple styling. Replace the placeholder content with your own app pages and functionality.</p>
+    <section class="intro">
+      <p>Choose a topic from the menu to explore. This template has 5 blank slots ready for your content.</p>
+      <div class="status-bar">
+        <span><strong>Connection:</strong> <span id="offlineStatus">Online</span></span>
+        <span><strong>App status:</strong> <span id="cacheStatus">Ready</span></span>
+      </div>
     </section>
 
-    <section class="placeholder">
-      <h3>Start building here</h3>
-      <p>Edit <code>index.html</code>, <code>style.css</code>, and <code>script.js</code> to create your app. Use <code>data.json</code> if you want a JSON-driven data source.</p>
-    </section>
+    <div class="layout">
+      <aside class="topic-menu">
+        <h2>Topics</h2>
+        <ul id="topicList"></ul>
+      </aside>
+
+      <section class="topic-detail" id="topicCard">
+        <p>Loading topics…</p>
+      </section>
+    </div>
   </main>
 
   <footer>

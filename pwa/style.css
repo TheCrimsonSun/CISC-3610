@@ -53,32 +53,132 @@ button {
   cursor: pointer;
 }
 
-button.hidden {
-  display: none;
+button.install-button {
+  margin-top: 1rem;
+  display: inline-flex;
+}
+
+button:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
 }
 
 main {
   padding: 0 1.5rem 2rem;
 }
 
-.hero,
-.placeholder {
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 24px;
-  padding: 1.75rem;
-  margin-bottom: 1.25rem;
+.intro {
+  display: grid;
+  gap: 1.1rem;
+  padding: 1rem 0 0.75rem;
 }
 
-.hero h2,
-.placeholder h3 {
+.layout {
+  display: grid;
+  grid-template-columns: minmax(220px, 290px) 1fr;
+  gap: 1.25rem;
+}
+
+.topic-menu {
+  background: rgba(21, 33, 83, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 24px;
+  padding: 1.25rem;
+}
+
+.topic-menu h2 {
   margin-top: 0;
 }
 
-.hero p,
-.placeholder p {
-  line-height: 1.7;
-  color: var(--muted);
+.topic-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0.85rem 0 0;
+  display: grid;
+  gap: 0.8rem;
+}
+
+.topic-menu li {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+}
+
+.topic-menu button {
+  width: 100%;
+  background: transparent;
+  color: var(--text);
+  padding: 0.95rem 1rem;
+  text-align: left;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+.topic-menu button.active {
+  background: rgba(127, 213, 255, 0.3);
+  color: var(--accent);
+  border-radius: 12px;
+}
+
+.topic-detail {
+  background: rgba(15, 23, 51, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 28px;
+  padding: 1.5rem;
+  min-height: 520px;
+  display: grid;
+  gap: 1.2rem;
+}
+
+.topic-detail h2 {
+  margin-top: 0;
+}
+
+.topic-detail .topic-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1rem;
+}
+
+.topic-detail .topic-image {
+  width: min(240px, 100%);
+  border-radius: 20px;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.12), rgba(255,255,255,0));
+}
+
+.topic-detail img,
+.topic-detail svg {
+  width: 100%;
+  display: block;
+}
+
+.topic-detail p {
+  line-height: 1.8;
+  color: #d7e4ff;
+}
+
+.status-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 0.9rem;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 1rem 1.2rem;
+}
+
+.status-bar span,
+.status-bar strong {
+  color: #e2efff;
+}
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
 }
 
 footer {

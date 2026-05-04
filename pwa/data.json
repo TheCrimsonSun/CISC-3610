@@ -1,5 +1,54 @@
 {
   "appName": "PWA Template",
-  "description": "Blank Progressive Web App template data.",
-  "topics": []
+  "description": "A blank Progressive Web App template with 5 editable topic slots.",
+  "user": {
+    "name": "Learner",
+    "progress": [],
+    "preferences": {
+      "voice": "default",
+      "volume": 0.9
+    }
+  },
+  "topics": [
+    {
+      "id": "topic1",
+      "title": "",
+      "category": "",
+      "text": "",
+      "image": "images/placeholder.svg",
+      "audioText": ""
+    },
+    {
+      "id": "topic2",
+      "title": "",
+      "category": "",
+      "text": "",
+      "image": "images/placeholder.svg",
+      "audioText": ""
+    },
+    {
+      "id": "topic3",
+      "title": "",
+      "category": "",
+      "text": "",
+      "image": "images/placeholder.svg",
+      "audioText": ""
+    },
+    {
+      "id": "topic4",
+      "title": "",
+      "category": "",
+      "text": "",
+      "image": "images/placeholder.svg",
+      "audioText": ""
+    },
+    {
+      "id": "topic5",
+      "title": "",
+      "category": "",
+      "text": "",
+      "image": "images/placeholder.svg",
+      "audioText": ""
+    }
+  ]
 }
