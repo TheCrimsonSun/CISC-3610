@@ -1,22 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 
-  <head>
-    <meta charset="UTF-8">
-    <title>CISC 3610 PWA</title>
-    
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#1d2f4b">
+  <title>PWA Template</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="stylesheet" href="style.css">
+  <link rel="apple-touch-icon" href="icons/icon-192.svg">
+</head>
 
-  </head>
-    
-  <body>
-  <canvas id="myCanvas"></canvas>
-    <script  src="./script.js"></script>
+<body>
+  <header>
+    <div>
+      <h1>PWA Template</h1>
+      <p>Use this blank Progressive Web App template to build your own installable app.</p>
+    </div>
+    <button id="installButton" class="hidden">Install App</button>
+  </header>
 
-    <hr class="line">
-		
-			<h1><a href="../assignments.html"> Assignments </a></h1> <br />
-		
-		<hr class="line">
-  </body>
-  
+  <main>
+    <section class="hero">
+      <h2>Blank App Shell</h2>
+      <p>This template includes a web app manifest, service worker registration, install prompt handling, and simple styling. Replace the placeholder content with your own app pages and functionality.</p>
+    </section>
+
+    <section class="placeholder">
+      <h3>Start building here</h3>
+      <p>Edit <code>index.html</code>, <code>style.css</code>, and <code>script.js</code> to create your app. Use <code>data.json</code> if you want a JSON-driven data source.</p>
+    </section>
+  </main>
+
+  <footer>
+    <p>Template version: blank PWA starter.</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+
 </html>
