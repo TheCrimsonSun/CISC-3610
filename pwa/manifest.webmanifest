@@ -1,7 +1,7 @@
 {
-  "name": "PWA Template",
-  "short_name": "PWATemplate",
-  "description": "A blank Progressive Web App starter manifest.",
+  "name": "PWA Touhou",
+  "short_name": "PWATouhou",
+  "description": "A Couple of Touhou Characters.",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
