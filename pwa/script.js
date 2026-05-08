@@ -9,16 +9,26 @@ const dataUrl = './data.json';
 let installPromptEvent = null;
 let appData = null;
 
+console.log('Script loaded!');
+
 async function fetchAppData() {
+  console.log('Fetching data from:', dataUrl);
   try {
     const response = await fetch(dataUrl);
+    console.log('Response status:', response.status);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
     appData = await response.json();
+    console.log('Data loaded:', appData);
     appTitle.textContent = appData.appName;
     appDescription.textContent = appData.description;
     buildTopicMenu(appData.topics);
     loadTopic(appData.topics[0]?.id);
   } catch (error) {
-    topicCard.innerHTML = '<p class="error">Unable to load app data. Check your connection or server.</p>';
+    console.error('Error loading data:', error);
+    console.error('Error details:', error.message);
+    topicCard.innerHTML = '<p class="error">Unable to load app data. Check your connection or server.<br><small>See console for details.</small></p>';
   }
 }
 
