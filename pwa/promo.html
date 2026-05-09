@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Gensokyo Archive – Promotional Page</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #0d0618; --accent: #c084fc; --accent2: #f472b6;
+      --text: #e2d9f3; --muted: #7c6a9a; --card: #1a0d33;
+      --border: rgba(192,132,252,0.2);
+      --font-head: 'Cinzel Decorative', serif;
+      --font-body: 'Crimson Pro', serif;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 1.1rem; }
+
+    /* Hero */
+    .hero {
+      min-height: 90vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 60px 24px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(192,132,252,0.12) 0%, transparent 65%);
+    }
+    .hero-orb {
+      width: 100px; height: 100px; border-radius: 50%; margin-bottom: 32px;
+      background: radial-gradient(circle at 35% 35%, #c084fc, #4c1d95, #1a0d33);
+      box-shadow: 0 0 60px rgba(192,132,252,0.5), 0 0 120px rgba(192,132,252,0.2);
+      animation: pulse 3s ease-in-out infinite;
+    }
+    .hero h1 { font-family: var(--font-head); font-size: clamp(2rem,6vw,4rem); color: var(--accent); margin-bottom: 16px; }
+    .hero p { font-size: 1.25rem; color: var(--muted); max-width: 560px; line-height: 1.7; margin-bottom: 36px; font-style: italic; }
+    .btn-launch {
+      display: inline-block; padding: 14px 36px; border-radius: 99px; text-decoration: none;
+      background: linear-gradient(135deg, #7c3aed, #be185d); color: #fff;
+      font-family: var(--font-body); font-size: 1.1rem;
+      box-shadow: 0 6px 30px rgba(124,58,237,0.45);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-launch:hover { transform: translateY(-2px); box-shadow: 0 10px 40px rgba(124,58,237,0.6); }
+
+    /* Features */
+    .features { padding: 80px 24px; max-width: 960px; margin: 0 auto; }
+    .features h2 { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); text-align: center; margin-bottom: 48px; }
+    .feature-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 24px; }
+    .feature-card {
+      background: var(--card); border: 1px solid var(--border); border-radius: 14px;
+      padding: 28px 24px;
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 12px; }
+    .feature-card h3 { font-family: var(--font-head); font-size: 1rem; color: var(--accent); margin-bottom: 10px; }
+    .feature-card p { color: var(--muted); line-height: 1.65; font-size: 1rem; }
+
+    /* Screenshots placeholder */
+    .screenshots { padding: 60px 24px; max-width: 960px; margin: 0 auto; }
+    .screenshots h2 { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); text-align: center; margin-bottom: 32px; }
+    .screenshot-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px; }
+    .screenshot-placeholder {
+      background: var(--card); border: 1px dashed var(--border); border-radius: 12px;
+      height: 200px; display: flex; align-items: center; justify-content: center;
+      color: var(--muted); font-size: 0.9rem; flex-direction: column; gap: 8px;
+    }
+    .screenshot-placeholder span { font-size: 2rem; }
+
+    /* Install Instructions */
+    .install { padding: 60px 24px; max-width: 700px; margin: 0 auto; }
+    .install h2 { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); margin-bottom: 28px; text-align: center; }
+    .steps { display: flex; flex-direction: column; gap: 16px; }
+    .step { display: flex; gap: 16px; align-items: flex-start; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; }
+    .step-num { font-family: var(--font-head); font-size: 1.4rem; color: var(--accent2); min-width: 32px; }
+    .step-text h4 { color: var(--text); margin-bottom: 4px; }
+    .step-text p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* Footer */
+    footer { text-align: center; padding: 40px 24px; color: var(--muted); font-size: 0.88rem; border-top: 1px solid var(--border); }
+
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 60px rgba(192,132,252,0.5), 0 0 120px rgba(192,132,252,0.2); }
+      50%      { box-shadow: 0 0 80px rgba(192,132,252,0.7), 0 0 160px rgba(192,132,252,0.3); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-orb"></div>
+    <h1>Gensokyo Archive</h1>
+    <p>An interactive Touhou Project character encyclopedia — explore, listen, and learn about the residents of Gensokyo.</p>
+    <a href="index.html" class="btn-launch">⛩ Launch the App</a>
+  </section>
+
+  <!-- Features -->
+  <section class="features">
+    <h2>Features</h2>
+    <div class="feature-grid">
+      <div class="feature-card">
+        <div class="feature-icon">📖</div>
+        <h3>Character Encyclopedia</h3>
+        <p>Browse detailed profiles of Touhou characters, including their abilities, species, and lore.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔊</div>
+        <h3>Audio Narration</h3>
+        <p>Listen to each character's description read aloud using the Web Speech API — perfect for hands-free learning.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📱</div>
+        <h3>Installable PWA</h3>
+        <p>Install directly on your phone or desktop and use the app offline — no app store required.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⌨️</div>
+        <h3>Keyboard Navigation</h3>
+        <p>Use arrow keys to flip through characters and spacebar to play/stop audio.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📂</div>
+        <h3>JSON-Powered</h3>
+        <p>All content is stored in a simple JSON file — easy to edit or expand with new characters.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌐</div>
+        <h3>Works Offline</h3>
+        <p>A service worker caches the app so it's available even without an internet connection.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Screenshots -->
+  <section class="screenshots">
+    <h2>Screenshots</h2>
+    <div class="screenshot-grid">
+      <div class="screenshot-placeholder">
+        <span>🖼</span>
+        <p>Replace with app screenshot 1</p>
+      </div>
+      <div class="screenshot-placeholder">
+        <span>🖼</span>
+        <p>Replace with app screenshot 2</p>
+      </div>
+      <div class="screenshot-placeholder">
+        <span>🖼</span>
+        <p>Replace with app screenshot 3</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Install Instructions -->
+  <section class="install">
+    <h2>How to Install</h2>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <h4>Open the app in your browser</h4>
+          <p>Visit the hosted URL in Chrome, Edge, or Safari on any device.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <h4>Look for the install prompt</h4>
+          <p>A banner will appear at the top of the app. Click <strong>Install</strong>.</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <h4>On mobile (iOS Safari)</h4>
+          <p>Tap the Share icon → "Add to Home Screen" → "Add".</p>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <h4>Launch from your home screen</h4>
+          <p>The app runs in standalone mode with offline support. No internet needed after first load.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>Gensokyo Archive &mdash; Built as a Progressive Web App &bull; Touhou Project characters &copy; ZUN</p>
+  </footer>
+
+</body>
+</html>
