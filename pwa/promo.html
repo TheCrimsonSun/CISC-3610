@@ -32,6 +32,12 @@
     .step-card p { color:var(--muted);font-size:0.93rem;margin:0; }
     footer { text-align:center;padding:36px 24px;color:var(--muted);font-size:0.85rem;border-top:1px solid var(--border); }
     @keyframes pulse { 0%,100%{box-shadow:0 0 60px rgba(192,132,252,0.5),0 0 120px rgba(192,132,252,0.2);}50%{box-shadow:0 0 80px rgba(192,132,252,0.7),0 0 160px rgba(192,132,252,0.3);} }
+    .btn-install { display:inline-flex;align-items:center;gap:10px;padding:14px 36px;border-radius:99px;border:none;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#be185d);color:#fff;font-family:'Crimson Pro',serif;font-size:1.1rem;box-shadow:0 6px 30px rgba(124,58,237,0.45);transition:all 0.2s; }
+    .btn-install:hover { transform:translateY(-2px);box-shadow:0 10px 40px rgba(124,58,237,0.6); }
+    .btn-install:disabled { opacity:0.45;cursor:not-allowed;transform:none; }
+    .install-wrap { display:flex;flex-wrap:wrap;gap:14px;justify-content:center;align-items:center;margin-top:8px; }
+    .install-note { font-size:0.82rem;color:var(--muted);margin-top:10px;font-style:italic; }
+    #install-success { display:none;color:#4ade80;font-size:0.95rem;margin-top:10px; }
   </style>
 </head>
 <body>
@@ -41,7 +47,12 @@
     <div class="hero-orb"></div>
     <h1 class="mb-3">Gensokyo Archive</h1>
     <p>An interactive Touhou Project character encyclopedia. Explore, listen, and learn — installable and offline-ready.</p>
-    <a href="index.html" class="btn-launch">⛩ Launch the App</a>
+    <div class="install-wrap">
+      <button id="install-btn" class="btn-install" disabled>📥 Install App</button>
+      <a href="index.html" class="btn-launch">⛩ Open in Browser</a>
+    </div>
+    <p id="install-success">✅ App installed! Find it on your home screen or desktop.</p>
+    <p class="install-note" id="install-note">Install button activates when your browser supports PWA install.</p>
   </section>
 
   <!-- Features -->
@@ -88,12 +99,13 @@
     <div class="row justify-content-center">
       <div class="col-lg-7">
         <h2 class="text-center">How to Install</h2>
-        <div class="step-card"><div class="step-num">1</div><div><h4>Open the app</h4><p>Visit the hosted URL in Chrome, Edge, or Safari on any device.</p></div></div>
-        <div class="step-card"><div class="step-num">2</div><div><h4>Click the Install banner</h4><p>A banner appears at the top of the app. Click <strong>Install</strong> and confirm.</p></div></div>
-        <div class="step-card"><div class="step-num">3</div><div><h4>On iOS Safari</h4><p>Tap the Share icon → "Add to Home Screen" → "Add".</p></div></div>
-        <div class="step-card"><div class="step-num">4</div><div><h4>Use it offline</h4><p>Once installed, the app works without an internet connection.</p></div></div>
-        <div class="text-center mt-4">
-          <a href="index.html" class="btn-launch">⛩ Launch the App</a>
+        <div class="step-card"><div class="step-num">1</div><div><h4>Open this page in Chrome or Edge</h4><p>The Install button above will light up automatically when your browser is ready.</p></div></div>
+        <div class="step-card"><div class="step-num">2</div><div><h4>Click "📥 Install App"</h4><p>A browser dialog will appear — click <strong>Install</strong> to confirm.</p></div></div>
+        <div class="step-card"><div class="step-num">3</div><div><h4>On iOS Safari</h4><p>Tap the Share icon → "Add to Home Screen" → "Add". (iOS does not show an install button.)</p></div></div>
+        <div class="step-card"><div class="step-num">4</div><div><h4>Use it offline</h4><p>Once installed, the app works without an internet connection from your home screen or desktop.</p></div></div>
+        <div class="text-center mt-4 d-flex flex-wrap gap-3 justify-content-center">
+          <button id="install-btn-2" class="btn-install" disabled>📥 Install App</button>
+          <a href="index.html" class="btn-launch">⛩ Open in Browser</a>
         </div>
       </div>
     </div>
@@ -107,5 +119,44 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('sw.js').catch(() => {});
+    }
+
+    let deferredPrompt = null;
+    const btns = [document.getElementById('install-btn'), document.getElementById('install-btn-2')];
+    const note = document.getElementById('install-note');
+    const successMsg = document.getElementById('install-success');
+
+    window.addEventListener('beforeinstallprompt', e => {
+      e.preventDefault();
+      deferredPrompt = e;
+      btns.forEach(b => { b.disabled = false; b.textContent = '\u{1F4E5} Install App'; });
+      if (note) note.textContent = 'Your browser is ready — click Install App!';
+    });
+
+    async function triggerInstall() {
+      if (!deferredPrompt) return;
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      deferredPrompt = null;
+      if (outcome === 'accepted') {
+        btns.forEach(b => { b.disabled = true; b.textContent = '\u2705 Installed!'; });
+        if (successMsg) successMsg.style.display = 'block';
+        if (note) note.style.display = 'none';
+      } else {
+        btns.forEach(b => { b.textContent = '\u{1F4E5} Install App'; });
+      }
+    }
+
+    btns.forEach(b => b.addEventListener('click', triggerInstall));
+
+    window.addEventListener('appinstalled', () => {
+      btns.forEach(b => { b.disabled = true; b.textContent = '\u2705 Installed!'; });
+      if (successMsg) successMsg.style.display = 'block';
+      if (note) note.style.display = 'none';
+    });
+  </script>
 </body>
 </html>
