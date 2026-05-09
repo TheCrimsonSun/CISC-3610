@@ -17,6 +17,8 @@
     .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.55); color: #fff; }
     .btn-outline { border: 1px solid rgba(192,132,252,0.3); color: #c084fc; }
     .btn-outline:hover { background: rgba(192,132,252,0.1); color: #c084fc; }
+    #installBtn { display: none; }
+    #installBtn.show { display: inline-block; }
   </style>
 </head>
 <body>
@@ -25,9 +27,35 @@
   <p>An interactive Touhou Project character encyclopedia. Learn about the residents of Gensokyo — installable, offline-ready, and free.</p>
   <div class="links">
     <a href="index.html" class="btn-main">⛩ Launch the App</a>
+    <button id="installBtn" class="btn-main" style="border: none; cursor: pointer;">📲 Install PWA</button>
     <a href="promo.html" class="btn-outline">📄 About &amp; Install Guide</a>
     <a href="user-docs.html" class="btn-outline">📖 User Documentation</a>
     <a href="programmer-docs.html" class="btn-outline">🛠 Programmer Docs</a>
   </div>
+
+  <script>
+    let deferredPrompt;
+    const installBtn = document.getElementById('installBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      installBtn.classList.add('show');
+    });
+
+    installBtn.addEventListener('click', async () => {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        console.log(`User response to the install prompt: ${outcome}`);
+        deferredPrompt = null;
+        installBtn.classList.remove('show');
+      }
+    });
+
+    window.addEventListener('appinstalled', () => {
+      console.log('PWA was installed');
+    });
+  </script>
 </body>
 </html>
