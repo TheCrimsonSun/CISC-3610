@@ -17,8 +17,7 @@
     .btn-main:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(124,58,237,0.55); color: #fff; }
     .btn-outline { border: 1px solid rgba(192,132,252,0.3); color: #c084fc; }
     .btn-outline:hover { background: rgba(192,132,252,0.1); color: #c084fc; }
-    #installBtn { display: none; }
-    #installBtn.show { display: inline-block; }
+    #installBtn { display: inline-block; }
   </style>
 </head>
 <body>
@@ -40,16 +39,18 @@
     window.addEventListener('beforeinstallprompt', (e) => {
       e.preventDefault();
       deferredPrompt = e;
-      installBtn.classList.add('show');
     });
 
     installBtn.addEventListener('click', async () => {
       if (deferredPrompt) {
+        // Browser supports native install prompt
         deferredPrompt.prompt();
         const { outcome } = await deferredPrompt.userChoice;
         console.log(`User response to the install prompt: ${outcome}`);
         deferredPrompt = null;
-        installBtn.classList.remove('show');
+      } else {
+        // Fallback for unsupported browsers - show manual installation guide
+        alert('📲 Manual Installation:\n\n1. Open the app in your browser\n2. Look for the "Add to Home Screen" or menu option\n3. Follow the browser prompts\n\nFor detailed instructions, see the "About & Install Guide" page.');
       }
     });
 
