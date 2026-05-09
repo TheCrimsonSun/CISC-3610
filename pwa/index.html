@@ -8,6 +8,9 @@
   <title>Gensokyo Archive</title>
   <link rel="manifest" href="manifest.json" />
   <link rel="icon" href="icons/icon-192.png" />
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="style.css" />
@@ -17,77 +20,82 @@
   <!-- Install Banner -->
   <div id="install-banner" class="install-banner hidden">
     <span>📥 Install Gensokyo Archive on your device</span>
-    <button id="install-btn">Install</button>
-    <button id="dismiss-btn">✕</button>
+    <button id="install-btn" class="btn btn-sm btn-light ms-2">Install</button>
+    <button id="dismiss-btn" class="btn btn-sm btn-outline-light ms-1">✕</button>
   </div>
 
-  <!-- Sidebar -->
-  <nav id="sidebar">
-    <div class="sidebar-header">
-      <div class="app-logo">⛩</div>
-      <h1 class="app-title">Gensokyo<br/>Archive</h1>
-    </div>
-    <p class="sidebar-sub">Touhou Character Encyclopedia</p>
-    <ul id="topic-menu" class="topic-menu"></ul>
-    <div class="sidebar-footer">
-      <span id="user-name-display"></span>
-    </div>
-  </nav>
+  <!-- Mobile Hamburger -->
+  <button id="hamburger" aria-label="Toggle menu">
+    <span></span><span></span><span></span>
+  </button>
 
-  <!-- Main Content -->
-  <main id="main">
+  <div class="app-layout">
 
-    <!-- Welcome Screen -->
-    <section id="welcome-screen" class="welcome-screen">
-      <div class="welcome-orb"></div>
-      <h2 class="welcome-title">Welcome to Gensokyo</h2>
-      <p class="welcome-sub">Select a character from the menu to begin your journey through the world of Touhou.</p>
-      <div class="welcome-hint">☞ Use the menu on the left</div>
-    </section>
-
-    <!-- Character Card -->
-    <section id="character-card" class="character-card hidden">
-      <div class="card-bg-pattern"></div>
-
-      <div class="card-header">
-        <span id="card-category" class="card-category"></span>
-        <h2 id="card-title" class="card-title"></h2>
+    <!-- Sidebar -->
+    <nav id="sidebar">
+      <div class="sidebar-header">
+        <div class="app-logo">⛩</div>
+        <h1 class="app-title">Gensokyo<br/>Archive</h1>
       </div>
+      <p class="sidebar-sub">Touhou Character Encyclopedia</p>
+      <ul id="topic-menu" class="topic-menu"></ul>
+      <div class="sidebar-footer">
+        <span id="user-name-display"></span>
+      </div>
+    </nav>
 
-      <div class="card-body">
-        <div class="card-image-wrap">
-          <img id="card-image" src="" alt="" class="card-image" />
-          <div class="image-glow"></div>
+    <!-- Main Content -->
+    <main id="main">
+
+      <!-- Welcome Screen -->
+      <section id="welcome-screen" class="welcome-screen">
+        <div class="welcome-orb"></div>
+        <h2 class="welcome-title">Welcome to Gensokyo</h2>
+        <p class="welcome-sub">Select a character from the menu to begin your journey.</p>
+        <div class="welcome-hint">☞ Use the menu on the left</div>
+      </section>
+
+      <!-- Character Card -->
+      <section id="character-card" class="character-card hidden">
+        <div class="card-bg-pattern"></div>
+
+        <div class="card-header-custom">
+          <span id="card-category" class="card-category"></span>
+          <h2 id="card-title" class="card-title"></h2>
         </div>
 
-        <div class="card-content">
-          <p id="card-text" class="card-text"></p>
-
-          <div class="card-controls">
-            <button id="play-btn" class="btn-play" aria-label="Play audio">
-              <span class="btn-icon">▶</span> Listen
-            </button>
-            <button id="stop-btn" class="btn-stop hidden" aria-label="Stop audio">
-              <span class="btn-icon">■</span> Stop
-            </button>
+        <div class="card-body-custom">
+          <div class="card-image-wrap">
+            <img id="card-image" src="" alt="" class="card-image" />
+            <div class="image-glow"></div>
           </div>
 
-          <div class="progress-track">
-            <div id="progress-bar" class="progress-bar"></div>
+          <div class="card-content">
+            <p id="card-text" class="card-text"></p>
+
+            <div class="d-flex gap-2 mb-3">
+              <button id="play-btn" class="btn-play">▶ Listen</button>
+              <button id="stop-btn" class="btn-stop hidden">■ Stop</button>
+            </div>
+
+            <div class="progress-track">
+              <div id="progress-bar" class="progress-bar-fill"></div>
+            </div>
+            <p id="progress-label" class="progress-label"></p>
           </div>
-          <p id="progress-label" class="progress-label"></p>
         </div>
-      </div>
 
-      <div class="card-nav">
-        <button id="prev-btn" class="btn-nav">← Prev</button>
-        <span id="card-counter" class="card-counter"></span>
-        <button id="next-btn" class="btn-nav">Next →</button>
-      </div>
-    </section>
+        <div class="card-nav">
+          <button id="prev-btn" class="btn-nav">← Prev</button>
+          <span id="card-counter" class="card-counter"></span>
+          <button id="next-btn" class="btn-nav">Next →</button>
+        </div>
+      </section>
 
-  </main>
+    </main>
+  </div><!-- /.app-layout -->
 
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

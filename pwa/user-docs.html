@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Documentation – Gensokyo Archive</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Crimson+Pro:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet" />
+  <style>
+    body { background: #0d0618; color: #e2d9f3; font-family: 'Crimson Pro', serif; font-size: 1.05rem; }
+    .container { max-width: 800px; padding: 60px 24px; }
+    h1 { font-family: 'Cinzel Decorative', serif; color: #c084fc; font-size: 1.8rem; margin-bottom: 8px; }
+    h2 { font-family: 'Cinzel Decorative', serif; color: #c084fc; font-size: 1.1rem; margin: 40px 0 14px; }
+    p, li { color: #b8a8d0; line-height: 1.75; }
+    .badge-cat { background: rgba(192,132,252,0.15); border: 1px solid rgba(192,132,252,0.3); color: #c084fc; border-radius: 99px; padding: 2px 12px; font-size: 0.8rem; }
+    .card-doc { background: #1a0d33; border: 1px solid rgba(192,132,252,0.2); border-radius: 12px; padding: 20px 24px; margin-bottom: 14px; }
+    kbd { background: #2a1550; color: #c084fc; border: 1px solid rgba(192,132,252,0.3); border-radius: 4px; padding: 2px 8px; font-size: 0.9rem; }
+    a { color: #f472b6; }
+    .back { margin-bottom: 32px; }
+  </style>
+</head>
+<body>
+<div class="container">
+  <div class="back"><a href="home.html">← Back to Home</a></div>
+  <h1>User Documentation</h1>
+  <p class="text-muted fst-italic mb-4">Gensokyo Archive — Touhou Character Encyclopedia PWA</p>
+
+  <h2>What is Gensokyo Archive?</h2>
+  <p>Gensokyo Archive is an interactive Progressive Web App (PWA) that lets you explore profiles of Touhou Project characters. Each character card includes a name, species category, a description, an image, and an audio narration. The app works offline once installed.</p>
+
+  <h2>Features</h2>
+  <div class="card-doc">📖 <strong>Character Encyclopedia</strong> — Browse detailed profiles loaded dynamically from a JSON data file.</div>
+  <div class="card-doc">🔊 <strong>Audio Narration</strong> — Each character can be read aloud. Uses a provided audio file if available, or falls back to your browser's built-in text-to-speech.</div>
+  <div class="card-doc">📱 <strong>Installable PWA</strong> — Install directly on your phone or desktop. No app store needed.</div>
+  <div class="card-doc">🌐 <strong>Offline Support</strong> — A service worker caches the app so it works without internet after the first load.</div>
+  <div class="card-doc">⌨️ <strong>Keyboard Navigation</strong> — Navigate between characters and control audio without a mouse.</div>
+
+  <h2>How to Use</h2>
+  <ol class="ps-4">
+    <li class="mb-2">Open the app in your browser. Select a character from the <strong>left sidebar menu</strong>.</li>
+    <li class="mb-2">Read the character's description in the card on the right.</li>
+    <li class="mb-2">Click <strong>▶ Listen</strong> to hear the audio narration. Click <strong>■ Stop</strong> to stop it.</li>
+    <li class="mb-2">Use <strong>← Prev</strong> and <strong>Next →</strong> buttons to move between characters.</li>
+    <li class="mb-2">On mobile, tap the <strong>☰ hamburger button</strong> (top-left) to open the menu.</li>
+  </ol>
+
+  <h2>Keyboard Shortcuts</h2>
+  <div class="card-doc">
+    <kbd>→</kbd> Next character &nbsp;&nbsp;
+    <kbd>←</kbd> Previous character &nbsp;&nbsp;
+    <kbd>Space</kbd> Play / Stop audio
+  </div>
+
+  <h2>How to Install</h2>
+  <ol class="ps-4">
+    <li class="mb-2">Open the app in <strong>Chrome</strong>, <strong>Edge</strong>, or <strong>Safari</strong>.</li>
+    <li class="mb-2">A banner appears at the top — click <strong>Install</strong>.</li>
+    <li class="mb-2"><em>On iOS Safari:</em> Tap Share → "Add to Home Screen" → Add.</li>
+    <li class="mb-2">The app will appear on your home screen or desktop and can be used offline.</li>
+  </ol>
+
+  <h2>Browser Compatibility</h2>
+  <p>Best experience in Chrome and Edge. Firefox supports all features except the install prompt. Safari on iOS supports "Add to Home Screen" manually via the Share menu.</p>
+
+  <h2>Running Locally</h2>
+  <p>The app must be served over HTTP — not opened directly as a file. If you have Python installed:</p>
+  <div class="card-doc"><code>python -m http.server 8000</code> → then open <code>http://localhost:8000</code></div>
+</div>
+</body>
+</html>
