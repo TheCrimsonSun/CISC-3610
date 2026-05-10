@@ -23,9 +23,12 @@
     .feature-icon { font-size:2rem;margin-bottom:12px; }
     .feature-card h3 { font-family:'Cinzel Decorative',serif;font-size:0.95rem;color:var(--accent);margin-bottom:10px; }
     .feature-card p { color:var(--muted);font-size:0.95rem; }
-    .screenshot-box { background:var(--card);border:1px dashed var(--border);border-radius:12px;height:220px;display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--muted);font-size:0.85rem;gap:8px; }
-    .screenshot-box span { font-size:2.5rem; }
-    .screenshot-box img { width:100%;height:100%;object-fit:cover;border-radius:12px;display:none; }
+    .screenshot-box { background:var(--card);border:1px solid var(--border);border-radius:12px;overflow:hidden;height:240px;position:relative; }
+    .screenshot-box img { width:100%;height:100%;object-fit:cover;object-position:top center;display:block;transition:transform 0.3s; }
+    .screenshot-box img:hover { transform:scale(1.03); }
+    .screenshot-box.portrait { height:340px; }
+    .screenshot-box.portrait img { object-fit:contain;background:#0d0618; }
+    .screenshot-label { position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(13,6,24,0.9));padding:10px 14px;font-size:0.82rem;color:var(--text); }
     .step-card { background:var(--card);border:1px solid var(--border);border-radius:12px;padding:18px 20px;margin-bottom:14px;display:flex;gap:18px;align-items:flex-start; }
     .step-num { font-family:'Cinzel Decorative',serif;font-size:1.5rem;color:var(--accent2);min-width:32px; }
     .step-card h4 { color:var(--text);margin-bottom:4px;font-size:1rem; }
@@ -52,7 +55,6 @@
       <a href="index.html" class="btn-launch">⛩ Open in Browser</a>
     </div>
     <p id="install-success">✅ App installed! Find it on your home screen or desktop.</p>
-    <p class="install-note" id="install-note">Install button activates when your browser supports PWA install.</p>
   </section>
 
   <!-- Features -->
@@ -71,24 +73,23 @@
   <!-- Screenshots -->
   <section class="container">
     <h2 class="text-center">Screenshots</h2>
-    <p class="text-center mb-4" style="color:#7c6a9a;font-style:italic;">Replace the placeholders below with real screenshots of your app.</p>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="screenshot-box">
-          <span><img src="images/Home.png" alt="Home Screen"></span>
-          <p>Screenshot 1<br><small>e.g. Welcome screen</small></p>
+          <img src="images/Home.png" alt="Welcome screen" />
+          <div class="screenshot-label">Welcome Screen</div>
         </div>
       </div>
       <div class="col-md-4">
         <div class="screenshot-box">
-          <span><img src="images/Character.png" alt="Character Card"></span>
-          <p>Screenshot 2<br><small>e.g. Character card</small></p>
+          <img src="images/Character card.png" alt="Character card" />
+          <div class="screenshot-label">Character Card</div>
         </div>
       </div>
-      <div class="col-md-4">
-        <div class="screenshot-box">
-          <span><img src="images/Mobile.jpg" alt="Mobile View"></span>
-          <p>Screenshot 3<br><small>e.g. Mobile view</small></p>
+      <div class="col-md-4 col-lg-3 mx-lg-auto">
+        <div class="screenshot-box portrait">
+          <img src="images/Mobile.jpg" alt="Mobile view" />
+          <div class="screenshot-label">Mobile View</div>
         </div>
       </div>
     </div>
@@ -119,44 +120,6 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script>
-    if ('serviceWorker' in navigator) {
-      navigator.serviceWorker.register('sw.js').catch(() => {});
-    }
-
-    let deferredPrompt = null;
-    const btns = [document.getElementById('install-btn'), document.getElementById('install-btn-2')];
-    const note = document.getElementById('install-note');
-    const successMsg = document.getElementById('install-success');
-
-    window.addEventListener('beforeinstallprompt', e => {
-      e.preventDefault();
-      deferredPrompt = e;
-      btns.forEach(b => { b.disabled = false; b.textContent = '\u{1F4E5} Install App'; });
-      if (note) note.textContent = 'Your browser is ready — click Install App!';
-    });
-
-    async function triggerInstall() {
-      if (!deferredPrompt) return;
-      deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      deferredPrompt = null;
-      if (outcome === 'accepted') {
-        btns.forEach(b => { b.disabled = true; b.textContent = '\u2705 Installed!'; });
-        if (successMsg) successMsg.style.display = 'block';
-        if (note) note.style.display = 'none';
-      } else {
-        btns.forEach(b => { b.textContent = '\u{1F4E5} Install App'; });
-      }
-    }
-
-    btns.forEach(b => b.addEventListener('click', triggerInstall));
-
-    window.addEventListener('appinstalled', () => {
-      btns.forEach(b => { b.disabled = true; b.textContent = '\u2705 Installed!'; });
-      if (successMsg) successMsg.style.display = 'block';
-      if (note) note.style.display = 'none';
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

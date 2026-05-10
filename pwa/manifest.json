@@ -12,22 +12,49 @@
       "src": "icons/icon-192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "icons/icon-512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "categories": ["education", "entertainment"],
   "screenshots": [
     {
-      "src": "screenshots/screen1.png",
-      "sizes": "1280x720",
+      "src": "images/Home.png",
+      "sizes": "1920x877",
       "type": "image/png",
-      "label": "Character encyclopedia view"
+      "form_factor": "wide",
+      "label": "Welcome screen"
+    },
+    {
+      "src": "images/Character card.png",
+      "sizes": "1920x877",
+      "type": "image/png",
+      "form_factor": "wide",
+      "label": "Character card view"
+    },
+    {
+      "src": "images/Mobile.jpg",
+      "sizes": "1080x2105",
+      "type": "image/jpeg",
+      "form_factor": "narrow",
+      "label": "Mobile view"
     }
   ]
 }

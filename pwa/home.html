@@ -31,32 +31,6 @@
     <a href="user-docs.html" class="btn-outline">📖 User Documentation</a>
     <a href="programmer-docs.html" class="btn-outline">🛠 Programmer Docs</a>
   </div>
-
-  <script>
-    let deferredPrompt;
-    const installBtn = document.getElementById('installBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
-
-    installBtn.addEventListener('click', async () => {
-      if (deferredPrompt) {
-        // Browser supports native install prompt
-        deferredPrompt.prompt();
-        const { outcome } = await deferredPrompt.userChoice;
-        console.log(`User response to the install prompt: ${outcome}`);
-        deferredPrompt = null;
-      } else {
-        // Fallback for unsupported browsers - show manual installation guide
-        alert('📲 Manual Installation:\n\n1. Open the app in your browser\n2. Look for the "Add to Home Screen" or menu option\n3. Follow the browser prompts\n\nFor detailed instructions, see the "About & Install Guide" page.');
-      }
-    });
-
-    window.addEventListener('appinstalled', () => {
-      console.log('PWA was installed');
-    });
-  </script>
+  <script src="app.js"></script>
 </body>
 </html>

@@ -101,8 +101,8 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
 .card-title { font-family: var(--font-head); font-size: 1.6rem; color: var(--accent); text-shadow: 0 0 20px rgba(192,132,252,0.3); }
 
 .card-body-custom { display: flex; gap: 28px; padding: 20px 28px; align-items: flex-start; }
-.card-image-wrap { position: relative; flex-shrink: 0; }
-.card-image { width: 160px; min-height: 120px; object-fit: contain; border-radius: 12px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); display: block; padding: 8px; }
+.card-image-wrap { position: relative; flex-shrink: 0; width: 160px; height: 160px; }
+.card-image { width: 160px; height: 160px; object-fit: contain; object-position: center; border-radius: 12px; background: rgba(255,255,255,0.04); border: 1px solid var(--border); display: block; padding: 10px; box-sizing: border-box; }
 .image-glow { position: absolute; inset: -10px; border-radius: 20px; background: radial-gradient(circle, rgba(192,132,252,0.15), transparent 70%); pointer-events: none; z-index: -1; }
 
 .card-content { flex: 1; }
@@ -140,6 +140,7 @@ html, body { height: 100%; background: var(--bg); color: var(--text); font-famil
   #sidebar.open { left: 0; }
   #main { padding: 20px 16px; }
   .card-body-custom { flex-direction: column; align-items: center; }
-  .card-image { width: 120px; }
+  .card-image-wrap { width: 120px; height: 120px; }
+  .card-image { width: 120px; height: 120px; }
   .card-title { font-size: 1.2rem; }
 }
