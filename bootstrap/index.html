@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Bootstrap Grid Playground</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --ink: #0d0d0d;
+      --paper: #f5f0e8;
+      --accent: #e84c1e;
+      --muted: #b8b2a7;
+      --grid-line: #ddd8ce;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'DM Mono', monospace;
+      font-size: 0.85rem;
+    }
+
+    /* ─── hero ─── */
+    .hero {
+      border-bottom: 2px solid var(--ink);
+      padding: 3rem 0 2rem;
+      background: var(--ink);
+      color: var(--paper);
+    }
+    .hero h1 {
+      font-family: 'Syne', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 5rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1;
+    }
+    .hero .badge-tag {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+      margin-bottom: 1rem;
+    }
+    .hero p {
+      color: var(--muted);
+      max-width: 520px;
+      line-height: 1.7;
+    }
+
+    /* ─── section labels ─── */
+    .section-label {
+      font-family: 'Syne', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-top: 2px solid var(--ink);
+      padding-top: 1.2rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .section-label .num {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.7rem;
+      padding: 0.15rem 0.45rem;
+      border-radius: 2px;
+    }
+
+    /* ─── grid cells ─── */
+    .gc {
+      background: var(--paper);
+      border: 1.5px solid var(--ink);
+      padding: 1rem 0.75rem;
+      text-align: center;
+      font-size: 0.72rem;
+      color: var(--ink);
+      margin-bottom: 1rem;
+      transition: background 0.15s, color 0.15s;
+      position: relative;
+      overflow: hidden;
+    }
+    .gc::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--accent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.2s ease;
+      z-index: 0;
+    }
+    .gc:hover::before { transform: scaleX(1); }
+    .gc:hover { color: #fff; }
+    .gc span { position: relative; z-index: 1; font-weight: 500; }
+    .gc .col-name {
+      position: relative;
+      z-index: 1;
+      font-family: 'Syne', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    /* ─── offset demo ─── */
+    .gc-offset { background: #e8e3d8; }
+
+    /* ─── responsive demo ─── */
+    .gc-responsive { min-height: 70px; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; }
+
+    /* ─── auto layout ─── */
+    .gc-auto { background: var(--paper); }
+
+    /* ─── nesting ─── */
+    .gc-nest-outer {
+      background: #e8e3d8;
+      border: 1.5px solid var(--ink);
+      padding: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .gc-nest-inner {
+      background: var(--paper);
+      border: 1.5px dashed var(--ink);
+      padding: 0.6rem;
+      text-align: center;
+      font-size: 0.72rem;
+      margin-bottom: 0.5rem;
+    }
+
+    /* ─── order demo ─── */
+    .gc-order { min-height: 60px; }
+    .visual-order {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 2px;
+    }
+    .visual-order .dom { font-size: 0.62rem; color: var(--muted); }
+
+    /* ─── legend ─── */
+    .legend {
+      border: 1.5px solid var(--grid-line);
+      padding: 1rem 1.2rem;
+      font-size: 0.75rem;
+      line-height: 2;
+      background: #fff;
+    }
+    .legend code {
+      background: #f0ece2;
+      padding: 0.1rem 0.35rem;
+      border-radius: 2px;
+      font-size: 0.72rem;
+    }
+
+    section { padding: 2.5rem 0; border-bottom: 1px solid var(--grid-line); }
+    section:last-of-type { border-bottom: none; }
+
+    /* resize hint */
+    .hint {
+      font-size: 0.7rem;
+      color: var(--muted);
+      margin-top: 0.3rem;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="container">
+    <div class="badge-tag">Bootstrap 5 · Grid System</div>
+    <h1>Grid<br>Playground</h1>
+    <p class="mt-3">A hands-on reference covering Bootstrap's 12-column grid — breakpoints, offsets, nesting, auto-columns, and order utilities.</p>
+    <p class="hint mt-2">↳ Resize the browser window to see responsive behaviour.</p>
+  </div>
+</div>
+
+<div class="container py-4">
+
+  <!-- ── 1. BASIC 12 COLUMNS ── -->
+  <section>
+    <div class="section-label"><span class="num">01</span> Basic 12-Column Grid</div>
+    <p class="mb-3">Bootstrap's grid is built on 12 equal columns. Any combination that adds to 12 fills a full row.</p>
+
+    <div class="row">
+      <div class="col-12"><div class="gc"><span class="col-name">col-12</span><br><span>full width</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-6"><div class="gc"><span class="col-name">col-6</span></div></div>
+      <div class="col-6"><div class="gc"><span class="col-name">col-6</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-4"><div class="gc"><span class="col-name">col-4</span></div></div>
+      <div class="col-4"><div class="gc"><span class="col-name">col-4</span></div></div>
+      <div class="col-4"><div class="gc"><span class="col-name">col-4</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-3"><div class="gc"><span class="col-name">col-3</span></div></div>
+      <div class="col-3"><div class="gc"><span class="col-name">col-3</span></div></div>
+      <div class="col-3"><div class="gc"><span class="col-name">col-3</span></div></div>
+      <div class="col-3"><div class="gc"><span class="col-name">col-3</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-8"><div class="gc"><span class="col-name">col-8</span></div></div>
+      <div class="col-4"><div class="gc"><span class="col-name">col-4</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+      <div class="col-2"><div class="gc"><span class="col-name">col-2</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── 2. RESPONSIVE BREAKPOINTS ── -->
+  <section>
+    <div class="section-label"><span class="num">02</span> Responsive Breakpoints</div>
+    <p class="mb-1">Breakpoints control layout at different viewport widths. Stack them to build fully responsive grids.</p>
+    <p class="hint mb-3">xs &lt;576px · sm ≥576px · md ≥768px · lg ≥992px · xl ≥1200px · xxl ≥1400px</p>
+
+    <!-- Example A: col-12 → col-sm-6 → col-lg-3 -->
+    <p class="mb-2" style="font-size:0.75rem;">→ <code>col-12 col-sm-6 col-lg-3</code>: 1 per row on mobile, 2 on sm, 4 on lg</p>
+    <div class="row">
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="gc gc-responsive">
+          <span class="col-name">A</span>
+          <span>12 / sm-6 / lg-3</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="gc gc-responsive">
+          <span class="col-name">B</span>
+          <span>12 / sm-6 / lg-3</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="gc gc-responsive">
+          <span class="col-name">C</span>
+          <span>12 / sm-6 / lg-3</span>
+        </div>
+      </div>
+      <div class="col-12 col-sm-6 col-lg-3">
+        <div class="gc gc-responsive">
+          <span class="col-name">D</span>
+          <span>12 / sm-6 / lg-3</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Example B: sidebar layout -->
+    <p class="mb-2 mt-3" style="font-size:0.75rem;">→ <code>col-12 col-md-4</code> sidebar + <code>col-12 col-md-8</code> main: stacked on mobile, side-by-side on md+</p>
+    <div class="row">
+      <div class="col-12 col-md-4">
+        <div class="gc gc-responsive" style="min-height:90px;">
+          <span class="col-name">Sidebar</span>
+          <span>col-12 col-md-4</span>
+        </div>
+      </div>
+      <div class="col-12 col-md-8">
+        <div class="gc gc-responsive" style="min-height:90px; background:#e8e3d8;">
+          <span class="col-name">Main Content</span>
+          <span>col-12 col-md-8</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. AUTO-WIDTH COLUMNS ── -->
+  <section>
+    <div class="section-label"><span class="num">03</span> Auto-Width Columns</div>
+    <p class="mb-3"><code>col</code> (no number) makes columns share space equally. <code>col-auto</code> sizes to content.</p>
+
+    <div class="row">
+      <div class="col"><div class="gc gc-auto"><span class="col-name">col</span><br><span>equal</span></div></div>
+      <div class="col"><div class="gc gc-auto"><span class="col-name">col</span><br><span>equal</span></div></div>
+      <div class="col"><div class="gc gc-auto"><span class="col-name">col</span><br><span>equal</span></div></div>
+    </div>
+    <div class="row mt-2">
+      <div class="col-auto"><div class="gc gc-auto"><span class="col-name">col-auto</span><br><span>fits content →</span></div></div>
+      <div class="col"><div class="gc gc-auto" style="background:#e8e3d8;"><span class="col-name">col</span><br><span>takes the rest</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── 4. OFFSETS ── -->
+  <section>
+    <div class="section-label"><span class="num">04</span> Offsets</div>
+    <p class="mb-3"><code>offset-N</code> pushes a column right by N column-widths, useful for centering or indenting.</p>
+
+    <div class="row">
+      <div class="col-4"><div class="gc gc-offset"><span class="col-name">col-4</span></div></div>
+      <div class="col-4 offset-4"><div class="gc"><span class="col-name">col-4 offset-4</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-6 offset-3"><div class="gc"><span class="col-name">col-6 offset-3</span><br><span>centered</span></div></div>
+    </div>
+    <div class="row">
+      <div class="col-3"><div class="gc gc-offset"><span class="col-name">col-3</span></div></div>
+      <div class="col-3 offset-3"><div class="gc"><span class="col-name">col-3 offset-3</span></div></div>
+    </div>
+  </section>
+
+  <!-- ── 5. NESTING ── -->
+  <section>
+    <div class="section-label"><span class="num">05</span> Nested Grids</div>
+    <p class="mb-3">Place a <code>row</code> inside any column to create a nested 12-column sub-grid.</p>
+
+    <div class="row">
+      <div class="col-9">
+        <div class="gc-nest-outer">
+          <div style="font-size:0.72rem; margin-bottom:0.5rem; font-family:'Syne',sans-serif; font-weight:700;">col-9 (outer)</div>
+          <div class="row">
+            <div class="col-8"><div class="gc-nest-inner">col-8 (inner)</div></div>
+            <div class="col-4"><div class="gc-nest-inner">col-4 (inner)</div></div>
+          </div>
+          <div class="row">
+            <div class="col-4"><div class="gc-nest-inner">col-4</div></div>
+            <div class="col-4"><div class="gc-nest-inner">col-4</div></div>
+            <div class="col-4"><div class="gc-nest-inner">col-4</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <div class="gc" style="height:100%;">
+          <span class="col-name">col-3</span><br><span>outer sibling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 6. ORDER UTILITIES ── -->
+  <section>
+    <div class="section-label"><span class="num">06</span> Order Utilities</div>
+    <p class="mb-3"><code>order-N</code> reorders columns visually without changing DOM order — handy for responsive rearrangement.</p>
+
+    <div class="row">
+      <div class="col-4 order-3">
+        <div class="gc gc-order visual-order">
+          <span class="col-name">A</span>
+          <span class="dom">DOM: 1st · order-3</span>
+          <span style="font-size:0.62rem;">displays 3rd</span>
+        </div>
+      </div>
+      <div class="col-4 order-1">
+        <div class="gc gc-order visual-order" style="background:#e8e3d8;">
+          <span class="col-name">B</span>
+          <span class="dom">DOM: 2nd · order-1</span>
+          <span style="font-size:0.62rem;">displays 1st</span>
+        </div>
+      </div>
+      <div class="col-4 order-2">
+        <div class="gc gc-order visual-order">
+          <span class="col-name">C</span>
+          <span class="dom">DOM: 3rd · order-2</span>
+          <span style="font-size:0.62rem;">displays 2nd</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. GUTTERS ── -->
+  <section>
+    <div class="section-label"><span class="num">07</span> Gutter Control</div>
+    <p class="mb-3"><code>g-N</code>, <code>gx-N</code> (horizontal), <code>gy-N</code> (vertical) control spacing. <code>g-0</code> removes gutters entirely.</p>
+
+    <p style="font-size:0.75rem;" class="mb-1">→ <code>g-0</code> — no gutters</p>
+    <div class="row g-0 mb-3">
+      <div class="col-4"><div class="gc" style="margin-bottom:0; border-right:none;">col-4</div></div>
+      <div class="col-4"><div class="gc" style="margin-bottom:0; border-right:none;">col-4</div></div>
+      <div class="col-4"><div class="gc" style="margin-bottom:0;">col-4</div></div>
+    </div>
+
+    <p style="font-size:0.75rem;" class="mb-1">→ <code>g-4</code> — large gutters</p>
+    <div class="row g-4">
+      <div class="col-4"><div class="gc">col-4</div></div>
+      <div class="col-4"><div class="gc">col-4</div></div>
+      <div class="col-4"><div class="gc">col-4</div></div>
+    </div>
+  </section>
+
+  <!-- ── LEGEND / CHEAT SHEET ── -->
+  <section>
+    <div class="section-label"><span class="num">↗</span> Quick Reference</div>
+    <div class="legend">
+      <strong>Columns</strong><br>
+      <code>col</code> equal width auto &nbsp;·&nbsp; <code>col-{1–12}</code> fixed width &nbsp;·&nbsp; <code>col-auto</code> content width<br><br>
+      <strong>Breakpoints</strong><br>
+      <code>col-sm-</code> ≥576px &nbsp;·&nbsp; <code>col-md-</code> ≥768px &nbsp;·&nbsp; <code>col-lg-</code> ≥992px &nbsp;·&nbsp; <code>col-xl-</code> ≥1200px<br><br>
+      <strong>Offsets</strong><br>
+      <code>offset-{1–11}</code> push right by N columns<br><br>
+      <strong>Order</strong><br>
+      <code>order-first</code> &nbsp;·&nbsp; <code>order-last</code> &nbsp;·&nbsp; <code>order-{1–5}</code><br><br>
+      <strong>Gutters</strong><br>
+      <code>g-{0–5}</code> both axes &nbsp;·&nbsp; <code>gx-{0–5}</code> horizontal &nbsp;·&nbsp; <code>gy-{0–5}</code> vertical
+    </div>
+  </section>
+
+</div><!-- /container -->
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+
+<hr class="line">
+		
+  <h1><a href="../assignments.html"> Assignments </a></h1> <br />
+		
+<hr class="line">
+</body>
+</html>
